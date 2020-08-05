@@ -16,7 +16,6 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-scripts": "3.4.1",
-    "typescript": "~3.7.2",
     "words-to-numbers": "^1.5.1"
   },
   "scripts": {
@@ -39,5 +38,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "ts-loader": "^8.0.2",
+    "typescript": "^3.7.5"
   }
 }
