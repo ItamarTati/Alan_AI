@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, createRef } from 'react';
 import { Card, CardActions, CardActionArea, CardContent, CardMedia, Button, Typography } from '@material-ui/core';
 import classNames from 'classnames';
 import useStyles from './styles';
@@ -9,13 +9,36 @@ interface Props {
     activeArticle: number
 }
 interface Article {
-    author: string, content: string, description: string, publishedAt: string, source: { id: string, name: string }, title: string, url: string, urlToImage: string
+    author: string, 
+    content: string, 
+    description: string, 
+    publishedAt: string, 
+    source: { id: string, 
+    name: string }, 
+    title: string, 
+    url: string, 
+    urlToImage: string
 }
 
 const NewsCard = ({ article: { description, publishedAt, source, title, url, urlToImage }, index, activeArticle }: Props) => {
     const classes = useStyles()
+    const [elRefs, setElRefs] = useState([]);
+    const scrollToRef = (ref: any) => window.scroll(0, ref.current.offsetTop - 50);
+  
+    useEffect(() => {
+      window.scroll(0, 0);
+        //@ts-ignore
+      setElRefs((refs) => Array(20).fill().map((_, j) => refs[j] || createRef()));
+    }, []);
+  
+    useEffect(() => {
+      if (index === activeArticle && elRefs[activeArticle]) {
+        scrollToRef(elRefs[activeArticle]);
+      }
+    }, [index, activeArticle, elRefs]);
+  
     return (
-        <Card className={classNames(classes.card, activeArticle === index ? classes.activeCard : null)}>
+        <Card ref ={elRefs[index]} className={classNames(classes.card, activeArticle === index ? classes.activeCard : null)}>
             <CardActionArea href={url} target="_blank">
                 <CardMedia className={classes.media} image={urlToImage || 'https://www.industry.gov.au/sites/default/files/August%202018/image/news-placeholder-738.png'} />
                 <div className={classes.details}>

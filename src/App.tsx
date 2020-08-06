@@ -2,14 +2,26 @@ import React, {useEffect, useState} from 'react';
 //@ts-ignore
 import * as alanBtn from '@alan-ai/alan-sdk-web'
 import NEWSCARDS from './components/NewsCards/NewsCards'
+import wordsToNumbers from 'words-to-numbers';
 import useStyles from './styles';
 
 interface Article{
-  author: string, content: string, description: string, publishedAt: string, source: {id: string, name: string}, title: string, url: string, urlToImage: string
+  author: string, 
+  content: string, 
+  description: string, 
+  publishedAt: string, 
+  source: {
+    id: string, 
+    name: string
+  }, 
+  title: string, 
+  url: string, 
+  urlToImage: string
 }
 interface Command{
   command: string,
   articles: Article[],
+  number: any
 }
 
 
@@ -24,16 +36,28 @@ const App: React.FC = () => {
   useEffect(() => {
     alanBtn({
       key: alanKey,
-      onCommand: ( { command, articles }: Command ) => {
-        if(command === 'newHeadlines'){
-          setNewsArticles(articles) 
-          setActiveArticle(-1)
-        } else if(command === 'highlight'){
-          setActiveArticle((prevActiveArticle)=> prevActiveArticle + 1)
+      onCommand: ({ command, articles, number }: Command) => {
+        if (command === 'newHeadlines') {
+          setNewsArticles(articles);
+          setActiveArticle(-1);
+        } else if (command === 'highlight') {
+          setActiveArticle((prevActiveArticle) => prevActiveArticle + 1);
+        } else if (command === 'open') {
+          const parsedNumber = number.length > 2 ? wordsToNumbers((number), { fuzzy: true }) : number;
+          const article = articles[parsedNumber - 1];
+
+          if (parsedNumber > 20) {
+            alanBtn().playText('Please try that again...');
+          } else if (article) {
+            window.open(article.url, '_blank');
+            alanBtn().playText('Opening..., if article is not opening, please make sure your browser isn\'t blocking redirects...');
+          } else {
+            alanBtn().playText('Please try that again...');
+          }
         }
-      }
-    })
-  }, [])
+      },
+    });
+  }, []);
 
   return (
     <div>

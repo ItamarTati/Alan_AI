@@ -4,7 +4,15 @@ import useStyles from './styles'
 import NEWSCARD from '../NewsCard/NewsCard'
 
 interface Article {
-    author: string, content: string, description: string, publishedAt: string, source: { id: string, name: string }, title: string, url: string, urlToImage: string
+    author: string, 
+    content: string, 
+    description: string, 
+    publishedAt: string, 
+    source: { id: string, 
+    name: string }, 
+    title: string, 
+    url: string, 
+    urlToImage: string
 }
 interface Command {
     articles: Article[],
