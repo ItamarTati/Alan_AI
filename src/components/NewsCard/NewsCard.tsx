@@ -14,19 +14,19 @@ interface Article{
   const NewsCard = ({ article: { description, publishedAt, source, title, url, urlToImage }, index}: Props) => {
     const classes= useStyles()  
     return (
-      <Card>
-          <CardActionArea>
+      <Card className={classes.card}>
+          <CardActionArea href ={url} target="_blank">
               <CardMedia className={classes.media} image ={urlToImage || 'https://www.industry.gov.au/sites/default/files/August%202018/image/news-placeholder-738.png'}/>
-              <div>
+              <div className={classes.details}>
                   <Typography variant="body2" color="textSecondary" component="h2">{(new Date(publishedAt)).toDateString()}</Typography>
                   <Typography variant="body2" color="textSecondary" component="h2">{source.name}</Typography>
               </div>
-              <Typography gutterBottom variant="h5" component="h2">{title}</Typography>
+              <Typography className={classes.title} gutterBottom variant="h5" component="h2">{title}</Typography>
               <CardContent>
                   <Typography variant="body2" color="textSecondary" component="p">{description}</Typography>
               </CardContent>
           </CardActionArea>
-          <CardActions>
+          <CardActions className={classes.cardActions}>
               <Button size="small" color="primary" href=''>Learn More</Button>
               <Typography variant="h5" color="textSecondary" component="h2">{index + 1}</Typography>
           </CardActions>
