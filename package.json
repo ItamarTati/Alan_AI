@@ -1,5 +1,5 @@
 {
-  "homepage": "http://ItamarTati.github.io/alan_ai",
+  "homepage": "https://ItamarTati.github.io/alan_ai",
   "name": "alan_ai",
   "version": "0.1.0",
   "private": true,
@@ -15,7 +15,6 @@
     "@types/react": "^16.9.44",
     "@types/react-dom": "^16.9.8",
     "classnames": "^2.2.6",
-    "gh-pages": "^3.1.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-scripts": "3.4.1",
@@ -23,11 +22,11 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -45,6 +44,7 @@
     ]
   },
   "devDependencies": {
+    "gh-pages": "^3.1.0",
     "ts-loader": "^8.0.2",
     "typescript": "^3.7.5"
   }
