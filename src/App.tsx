@@ -4,6 +4,7 @@ import * as alanBtn from '@alan-ai/alan-sdk-web'
 import NEWSCARDS from './components/NewsCards/NewsCards'
 import wordsToNumbers from 'words-to-numbers';
 import useStyles from './styles';
+import image from './alan-logo.jpeg'
 
 interface Article{
   author: string, 
@@ -62,7 +63,7 @@ const App: React.FC = () => {
   return (
     <div>
       <div className = {classes.logoContainer}>
-        <img src="https://alan.app/voice/images/previews/preview.jpg" className={classes.alanLogo}alt ="alan logo"/>
+        <img src={image} className={classes.alanLogo}alt ="alan logo"/>
       </div>
       <NEWSCARDS key = 'news' articles = {newsArticles} activeArticle = {activeArticle}/>
     </div>
